@@ -3,7 +3,7 @@
 # digits.py
 #
 #
-
+ 
 import numpy as np
 from sklearn import cross_validation
 import pandas as pd
