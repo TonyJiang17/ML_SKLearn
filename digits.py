@@ -1,9 +1,3 @@
-#
-#
-# digits.py
-#
-#
- 
 import numpy as np
 from sklearn import cross_validation
 import pandas as pd
@@ -97,11 +91,7 @@ y_test = y_data_full[0:split]                  # the final testing outputs/label
 y_train = y_data_full[split:]                  # the training outputs/labels (known)
 
 
-
-#
-# here, you'll implement the kNN model
-#
-
+#implementing KKN
 from sklearn.neighbors import KNeighborsClassifier
 
 k_choices = [1,3,5,7,9,11,15,21,32,42,51,71,91]
@@ -163,6 +153,8 @@ print ("best k value is: ", best_k)
 #once k value is found, create knn using the best k value 
 knn = KNeighborsClassifier(n_neighbors=best_k)
 
+#The following are for the half-pixal digits test, which uses similar variables as the 
+#first half of this file. Comment out first half if wnat to test this half.
 """"
 k_choices = [1,3,5,7,9,11,15,21,32,42,51,71,91]
 best_k = 0
@@ -269,29 +261,18 @@ print(knn2.predict(X_data_half_known))
 """
 Comments and results:
 
-Briefly mention how this went:
-  + what value of k did you decide on for your kNN?   1
-  + how smoothly were you able to adapt from the iris dataset to here? pretty smooth 
-  + how high were you able to get the average cross-validation (testing) score? 
   For the first prediction, the average cross-validation can get as high as 0.98
   For the second predcition, the average cross-validation is around 0.95
 
 
 
-
-Then, include the predicted labels of the 12 digits with full data but no label:
-Past those labels (just labels) here:
-You'll have 12 lines:
+The predicted labels of the 12 digits with full data but no label:
 ['digit 9' 'digit 9' 'digit 5' 'digit 5' 'digit 6' 'digit 5' 'digit 0'                                                              
  'digit 3' 'digit 8' 'digit 9' 'digit 8' 'digit 4']
 
 
 
-And, include the predicted labels of the 10 digits that are "partially erased" and have no label:
-Mention briefly how you handled this situation!?
-
-Past those labels (just labels) here:
-You'll have 10 lines:
+The predicted labels of the 10 digits that are "partially erased" and have no label:
 
 ['digit 0' 'digit 0' 'digit 0' 'digit 1' 'digit 7' 'digit 2' 'digit 3'                                                              
  'digit 4' 'digit 0' 'digit 1']    
