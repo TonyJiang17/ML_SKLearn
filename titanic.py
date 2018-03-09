@@ -1,9 +1,3 @@
-#
-#
-# titanic.py
-#
-#
-
 import numpy as np
 from sklearn import datasets
 from sklearn import cross_validation
@@ -16,7 +10,6 @@ df.head()
 df.info()
 
 # let's drop columns with too few values or that won't be meaningful
-# Here's an example of dropping the 'body' column:
 df = df.drop('body', axis=1)  # axis = 1 means column
 df = df.drop('home.dest', axis=1)  
 df = df.drop('name', axis=1)
@@ -25,18 +18,16 @@ df = df.drop('boat', axis=1)
 df = df.drop('cabin', axis = 1)
 
 
-# let's drop all of the rows with missing data:
+# drop all of the rows with missing data:
 df = df.dropna()
 
-# let's see our dataframe again...
-# I ended up with 1001 rows (anything over 500-600 seems reasonable)
+#see our dataframe again
 df.head()
 df.info()
 
 
 
 # You'll need conversion to numeric datatypes for all input columns
-#   Here's one example
 #
 def tr_mf(s):
     """ transforming the sex column from string to int
@@ -44,7 +35,7 @@ def tr_mf(s):
     d = { 'male':0, 'female':1 }
     return d[s]
 
-df['sex'] = df['sex'].map(tr_mf)  # apply the function to the column
+df['sex'] = df['sex'].map(tr_mf)  #apply
 
 def tr_sur(s):
     """ transforming the survived column from int to string
@@ -52,7 +43,7 @@ def tr_sur(s):
     dic = {0:'Died', 1:'Survived', -1:'unsure'}
     return dic[s]
     
-df['survived'] = df['survived'].map(tr_sur) #apply to the dataset
+df['survived'] = df['survived'].map(tr_sur) #apply
 
 def tr_emb(s):
   """transform the embarked column from string to int 
@@ -61,7 +52,6 @@ def tr_emb(s):
   return dic[s]
 df['embarked'] = df['embarked'].map(tr_emb)
 
-# let's see our dataframe again...
 df.head()
 df.info()
 
@@ -73,14 +63,13 @@ print("+++ end of pandas +++\n")
 
 print("+++ start of numpy/scikit-learn +++")
 
-# We'll stick with numpy - here's the conversion to a numpy array
 
 # extract the underlying data with the values attribute:
 y_data = df[ 'survived' ].values                  # also addressable by column name(s)
 X_data = df.drop('survived', axis=1).values        # everything except the 'survival' column
 
 # feature engineering based on personal intuition (changing the X_data)
-
+# kinda arbitrary 
 X_data[:,0] *= 100   
 X_data[:,1] *= 80   
 X_data[:,2] *= 5
@@ -114,7 +103,6 @@ y_train = y_data_full[split:]
 
 #
 # the rest of this model-building, cross-validation, and prediction will come here:
-#     build from the experience and code in the other two examples...
 #
 from sklearn.neighbors import KNeighborsClassifier
 
@@ -137,7 +125,7 @@ for k_value in k_choices:
 #
 # run cross-validation
 #
-        #   first, create cross-validation data (here 3/4 train and 1/4 test)
+        #  create cross-validation data (here 3/4 train and 1/4 test)
         cv_data_train, cv_data_test, cv_target_train, cv_target_test = \
             cross_validation.train_test_split(X_train, y_train, test_size=0.25) # random_state=0 
 
@@ -195,8 +183,7 @@ print(knn.predict(X_data_unknown))
 Comments and results:
 
 Briefly mention how this went:
-  + what value of k did you decide on for your kNN? 5
-  + how high were you able to get the average cross-validation (testing) score?
+  the average cross-validation (testing) score:
 
   0.804328572049
 
